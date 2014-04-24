@@ -8,44 +8,41 @@ import random
 import SimpleGUICS2Pygame.simpleguics2pygame as simplegui
 
 # initialize global variables used in your code
-secret_number = 0
-remaining_number = 0
 range_now = 100
 
 
 # helper function to start and restart the game
-def new_game(range_choice):
+def new_game():
     global secret_number
     global remaining_number
     global range_now
-    range_now = range_choice
     if range_now == 100:
         secret_number = random.randrange(0, 100)
         remaining_number = 7
-        print("New game.Range is from 0 to 100\nNumber of remaining guesses is %d\n" % remaining_number)
     if range_now == 1000:
         secret_number = random.randrange(0, 1000)
         remaining_number = 10
-        print("New game.Range is from 0 to 1000\nNumber of remaining guesses is %d\n" % remaining_number)
-    pass
+    print("New game.Range is from 0 to %d\nNumber of remaining guesses is %d\n" % (range_now, remaining_number))
 
 
 # define event handlers for control panel
 def restart_game():
     # button that restarts
-    new_game(range_now)
+    new_game()
 
 
 def range100():
     # button that changes range to range [0,100) and restarts
-    new_game(100)
-    pass
+    global range_now
+    range_now = 100
+    new_game()
 
 
 def range1000():
     # button that changes range to range [0,1000) and restarts
-    new_game(1000)
-    pass
+    global range_now
+    range_now = 1000
+    new_game()
 
 
 def input_guess(guess):
@@ -57,7 +54,7 @@ def input_guess(guess):
         if remaining_number == 0:
             print("Guess was %d\nNumber of remaining guesser is %d\nYou ran out of guesses.The number was %d\n"
                   % (guess, remaining_number, secret_number))
-            new_game(range_now)
+            new_game()
         else:
             print("Guess was %d\nNumber of remaining guesser is %d\nHigher!\n" % (guess, remaining_number))
     if guess > secret_number:
@@ -65,13 +62,13 @@ def input_guess(guess):
         if remaining_number == 0:
             print("Guess was %d\nNumber of remaining guesser is %d\nYou ran out of guesses.The number was %d\n"
                   % (guess, remaining_number, secret_number))
-            new_game(range_now)
+            new_game()
         else:
             print("Guess was %d\nNumber of remaining guesser is %d\nLower!\n" % (guess, remaining_number))
     if guess == secret_number:
         remaining_number -= 1
         print("Guess was %d\nNumber of remaining guesser is %d\nCorrect!\n" % (guess, remaining_number))
-        new_game(range_now)
+        new_game()
     pass
 
 
@@ -85,5 +82,5 @@ f.add_button("Range is [0, 1000)", range1000, 200)
 f.add_input("Enter a guess", input_guess, 200)
 
 # call new_game and start frame
-new_game(range_now)
+new_game()
 f.start()

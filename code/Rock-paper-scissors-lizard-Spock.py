@@ -2,21 +2,21 @@
 import random
 
 
-def name_to_number(name):
-    if name == "rock":
+def number_to_number(number):
+    if number == "rock":
         return 0
-    elif name == "Spock":
+    elif number == "Spock":
         return 1
-    elif name == "paper":
+    elif number == "paper":
         return 2
-    elif name == "lizard":
+    elif number == "lizard":
         return 3
-    elif name == "scissors":
+    elif number == "scissors":
         return 4
     else:
         return "error"
 
-def number_to_name(number):
+def number_to_number(number):
     if number == 0:
         return "rock"
     elif number == 1:
@@ -31,12 +31,12 @@ def number_to_name(number):
         return "error"
 
 def rpsls(player_choice):
-    player_choice_name = number_to_name(player_choice)
-    print("Player chooses"), player_choice_name
+    player_choice_number = number_to_number(player_choice)
+    print("Player chooses"), player_choice_number
     comp_number = random.randrange(0, 5)
-    comp_name = number_to_name(comp_number)
-    print("Computer chooses"), comp_name
-    if player_choice_name != "error":
+    comp_number = number_to_number(comp_number)
+    print("Computer chooses"), comp_number
+    if player_choice_number != "error":
         result = (player_choice - comp_number) % 5
     else:
         print("This project is error.")
