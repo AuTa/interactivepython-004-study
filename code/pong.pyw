@@ -1,4 +1,4 @@
-#http://www.codeskulptor.org/#save2_TJ6ewpAErs.py
+#http://www.codeskulptor.org/#user30_TJ6ewpAErs_0.py
 
 import SimpleGUICS2Pygame.simpleguics2pygame as simplegui
 import random
@@ -20,7 +20,6 @@ RIGHT = True
 def spawn_ball(direction):
     global ball_pos, ball_vel  # these are vectors stored as lists
     ball_pos = [WIDTH / 2, HEIGHT / 2]
-    # ball_vel = [20, 10]
     if direction:
         ball_vel = [random.randrange(120, 240) / 60, -random.randrange(60, 180) / 60]
     else:
@@ -70,19 +69,17 @@ def draw(canvas):
     # draw ball
     canvas.draw_circle(ball_pos, BALL_RADIUS, 1, "White", "White")
     # update paddle's vertical position, keep paddle on the screen
-    if paddle1_pos - HALF_PAD_HEIGHT >= 0 and paddle1_pos + HALF_PAD_HEIGHT <= HEIGHT:
+    if (paddle1_pos - HALF_PAD_HEIGHT == 0 and paddle1_vel < 0) or (
+                        paddle1_pos + HALF_PAD_HEIGHT == HEIGHT and paddle1_vel > 0):
+        paddle1_pos = paddle1_pos
+    else:
         paddle1_pos += paddle1_vel
-    if paddle1_pos - HALF_PAD_HEIGHT < 0:
-        paddle1_pos = HALF_PAD_HEIGHT
-    if paddle1_pos + HALF_PAD_HEIGHT > HEIGHT:
-        paddle1_pos = HEIGHT - HALF_PAD_HEIGHT
 
-    if paddle2_pos - HALF_PAD_HEIGHT >= 0 and paddle2_pos + HALF_PAD_HEIGHT <= HEIGHT:
+    if (paddle2_pos - HALF_PAD_HEIGHT == 0 and paddle2_vel < 0) or (
+                        paddle2_pos + HALF_PAD_HEIGHT == HEIGHT and paddle2_vel > 0):
+        paddle2_pos = paddle2_pos
+    else:
         paddle2_pos += paddle2_vel
-    if paddle2_pos - HALF_PAD_HEIGHT < 0:
-        paddle2_pos = HALF_PAD_HEIGHT
-    if paddle2_pos + HALF_PAD_HEIGHT > HEIGHT:
-        paddle2_pos = HEIGHT - HALF_PAD_HEIGHT
     # draw paddles
     canvas.draw_polygon([[0, paddle1_pos - HALF_PAD_HEIGHT], [PAD_WIDTH, paddle1_pos - HALF_PAD_HEIGHT],
                          [PAD_WIDTH, paddle1_pos + HALF_PAD_HEIGHT], [0, paddle1_pos + HALF_PAD_HEIGHT]], 1, "White",

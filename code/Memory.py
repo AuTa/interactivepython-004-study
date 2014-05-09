@@ -28,7 +28,7 @@ def pokemon_game():
     image = []
     for i in range(8):
         image.append(simplegui.load_image('http://dex.pm222.com/images/pokemon_img_cg/%03d.png' % (i * 3 + 1)))
-        print 'http://dex.pm222.com/images/pokemon_img_cg/%03d.png' % (i * 3 + 1)
+        # print 'http://dex.pm222.com/images/pokemon_img_cg/%03d.png' % (i * 3 + 1)
     image[7] = simplegui.load_image('http://dex.pm222.com/images/pokemon_img_cg/025.png')
     image.extend(image)
     for i in range(4):
